@@ -2,7 +2,49 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0..dtd">
 <beans>
 	<bean id="triangle" class="com.psl.SpringApplication.Triangle" >
-		<constructor-arg type="java.lang.String" value="Equilateral"/>
-		<constructor-arg type="int" value="10"/>
+		<property name="a" ref="ZeroPoint" />
+		<property name="points_map">
+			<map>
+				<entry key="0" value-ref="ZeroPoint" />
+				<entry key="1" value-ref="OnePoint" />
+				<entry key="2">
+					<bean class="com.psl.SpringApplication.Point">
+						<property name="x" value="20" />
+						<property name="y" value="0" />
+					</bean>
+				</entry>				
+			</map>
+		</property>
+		<property name="points">
+			<list>
+				<ref bean="ZeroPoint" />
+				<ref bean="OnePoint"/>
+				<ref bean="TwoPoint"/>
+			</list>
+		</property>
+		<property name="b">
+			<bean class="com.psl.SpringApplication.Point">
+				<property name="x" value="-20" />
+				<property name="y" value="0" />
+			</bean>		
+		</property>
+		<property name="c">
+			<bean class="com.psl.SpringApplication.Point">
+				<property name="x" value="20" />
+				<property name="y" value="0" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="ZeroPoint" class="com.psl.SpringApplication.Point">
+		<property name="x" value="0"/>
+		<property name="y" value="0"/>
+	</bean>
+	<bean id="OnePoint" class="com.psl.SpringApplication.Point">
+		<property name="x" value="-20" />
+		<property name="y" value="0" />
+	</bean>
+	<bean id="TwoPoint" class="com.psl.SpringApplication.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
 	</bean>
 </beans>
