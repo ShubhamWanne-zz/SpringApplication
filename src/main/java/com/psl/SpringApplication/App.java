@@ -9,12 +9,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App 
 {   
-	@SuppressWarnings("resource")
 	public static void main( String[] args ){
 		BeanFactory beanfactory = new ClassPathXmlApplicationContext("spring.xml");
 		Triangle triangle = (Triangle) beanfactory.getBean("triangle");
     	triangle.draw();	
-    			
     			
     }
 }
