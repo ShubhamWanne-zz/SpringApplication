@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0..dtd">
-<beans>
-	<bean id="triangle" class="com.psl.SpringApplication.Triangle" >
+
+	<beans>
+
+	<bean id="parentTriangle" class="com.psl.SpringApplication.Triangle">
 		<property name="a" ref="ZeroPoint" />
+		<property name="points">
+			<list>
+				<ref bean="ZeroPoint" />
+			</list>
+		</property>
+	</bean>
+	<bean id="triangle1" class="com.psl.SpringApplication.Triangle" parent="parentTriangle">
+		<property name="b" ref="OnePoint" />
+		<property name="c" ref="TwoPoint" />
+		<property name="points">
+			<list merge = "true">
+				<ref bean="OnePoint" />
+				<ref bean="TwoPoint" />
+			</list>
+		</property>
+	</bean>
+	<bean id="triangle2" class="com.psl.SpringApplication.Triangle" parent="triangle1">
+	</bean>
+
+	<bean id="triangle" class="com.psl.SpringApplication.Triangle"   >
+		<property name="a" ref="ZeroPoint" />
+				<property name="b">
+			<bean class="com.psl.SpringApplication.Point">
+				<property name="x" value="-20" />
+				<property name="y" value="0" />
+			</bean>		
+		</property>
+		<property name="c">
+			<bean class="com.psl.SpringApplication.Point">
+				<property name="x" value="20" />
+				<property name="y" value="0" />
+			</bean>
+		</property>
 		<property name="points_map">
 			<map>
 				<entry key="0" value-ref="ZeroPoint" />
@@ -20,31 +55,32 @@
 				<ref bean="ZeroPoint" />
 				<ref bean="OnePoint"/>
 				<ref bean="TwoPoint"/>
+				<bean class="com.psl.SpringApplication.Point">
+					<property name="x" value="20" />
+					<property name="y" value="10" />
+				</bean>
 			</list>
 		</property>
-		<property name="b">
-			<bean class="com.psl.SpringApplication.Point">
-				<property name="x" value="-20" />
-				<property name="y" value="0" />
-			</bean>		
-		</property>
-		<property name="c">
-			<bean class="com.psl.SpringApplication.Point">
-				<property name="x" value="20" />
-				<property name="y" value="0" />
-			</bean>
-		</property>
 	</bean>
-	<bean id="ZeroPoint" class="com.psl.SpringApplication.Point">
+	<bean id="ZeroPoint" class="com.psl.SpringApplication.Point"  >
 		<property name="x" value="0"/>
 		<property name="y" value="0"/>
 	</bean>
-	<bean id="OnePoint" class="com.psl.SpringApplication.Point">
+	<bean id="OnePoint" class="com.psl.SpringApplication.Point"  >
 		<property name="x" value="-20" />
 		<property name="y" value="0" />
 	</bean>
-	<bean id="TwoPoint" class="com.psl.SpringApplication.Point">
+	<bean id="TwoPoint" class="com.psl.SpringApplication.Point"  >
 		<property name="x" value="20" />
 		<property name="y" value="0" />
 	</bean>
+	<bean id="circle" class="com.psl.SpringApplication.Circle">
+		<property name="center" ref="ZeroPoint" />
+	</bean>
+	
+	
+<!--  	<bean class="com.psl.SpringApplication.CustomBeanPostProcessor" />
+	-->
+	
+	
 </beans>

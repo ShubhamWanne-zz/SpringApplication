@@ -3,11 +3,13 @@ package com.psl.SpringApplication;
 import java.util.List;
 import java.util.Map;
 
-public class Triangle {
+import org.springframework.beans.factory.BeanNameAware;
+
+public class Triangle implements BeanNameAware, Shape{
 	private Point a;
 	private Point b;
 	private Point c;
-	
+	private String beanName;
 	private List<Point> points;
 	private Map<Integer,Point> points_map;
 	
@@ -53,8 +55,22 @@ public class Triangle {
 	}
 
 	public void draw(){
-		System.out.println("Created triangle with; \na = "+a+", \nb = "+b+", \nc = "+c);
-		System.out.println("Create triangle with List of points : "+points);
-		System.out.println("Create triangle with Map of points : "+points_map);
+		System.out.println("Created "+this.beanName+" with; \na = "+a+", \nb = "+b+", \nc = "+c);
 	}
+
+	public void setBeanName(String beanName) {
+		// TODO Auto-generated method stub
+		this.beanName = beanName;
+	}
+
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Bean "+this.beanName+" has been initialized");
+	}
+
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Bean "+this.beanName+" is about to destroy");
+	}
+
 }
