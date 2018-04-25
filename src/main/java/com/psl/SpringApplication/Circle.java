@@ -1,15 +1,21 @@
 package com.psl.SpringApplication;
 
+import java.util.Locale;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Circle implements Shape{
 	
 	private Point center;
+	@Autowired
+	private MessageSource messageSource;
 	
 	public Point getCenter() {
 		return center;
@@ -20,15 +26,26 @@ public class Circle implements Shape{
 	}
 
 	public void draw() {
-		System.out.println("Drawing circle with center ("+center.getX()+", "+center.getY()+")");
+		System.out.println(messageSource.getMessage("draw.shape", 
+							new Object[]{"Circle",this.center.getX(),this.center.getY()}, 
+							"cannot draw object", Locale.ENGLISH)
+							);
 	}
 	
 	@PostConstruct
 	public void initCircle() {
-		System.out.println("About to instantiate a circle !");
+		System.out.println(messageSource.getMessage("greeting", 
+							new Object[]{"Circle"}, 
+							"greeting not found", Locale.ENGLISH)
+			);
+
 	}
 	@PreDestroy
 	public void destroyCircle(){
-		System.out.println("About to destroy a circle !");
+		System.out.println(messageSource.getMessage("farewell", 
+							new Object[]{"Circle"}, 
+							"farewell not found", Locale.ENGLISH)
+			);
+
 	}
 }

@@ -14,6 +14,7 @@ public class App
 		beanfactory.registerShutdownHook();
 		Shape shape = (Shape) beanfactory.getBean("circle");
 		shape.draw();
+		beanfactory.close();
 //		Triangle triangle2 = (Triangle) beanfactory.getBean("triangle2");
 //    	triangle2.draw();	    			
 //		Triangle triangle = (Triangle) beanfactory.getBean("parentTriangle");
