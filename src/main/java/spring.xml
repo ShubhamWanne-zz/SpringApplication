@@ -92,8 +92,6 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="circle" class="com.psl.SpringApplication.Circle">
-	</bean>
 	
 	<context:component-scan base-package="com.psl.SpringApplication"></context:component-scan>
 

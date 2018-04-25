@@ -1,8 +1,12 @@
 package com.psl.SpringApplication;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Circle implements Shape{
 	
 	private Point center;
@@ -22,5 +26,9 @@ public class Circle implements Shape{
 	@PostConstruct
 	public void initCircle() {
 		System.out.println("About to instantiate a circle !");
+	}
+	@PreDestroy
+	public void destroyCircle(){
+		System.out.println("About to destroy a circle !");
 	}
 }
