@@ -91,6 +91,7 @@
 				<value>property</value>
 			</list>
 		</property>
+	</bean>
 	<bean id="circle" class="com.psl.SpringApplication.Circle">
 	</bean>
 	
