@@ -7,18 +7,27 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Circle implements Shape{
+public class Circle implements Shape,ApplicationEventPublisherAware{
 	
 	private Point center;
 	@Autowired
 	private MessageSource messageSource;
+	private ApplicationEventPublisher publisher;
 	
 	public Point getCenter() {
 		return center;
+	}
+	public MessageSource getMessageSource() {
+		return messageSource;
+	}
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 	@Resource
 	public void setCenter(Point center) {
@@ -30,6 +39,7 @@ public class Circle implements Shape{
 							new Object[]{"Circle",this.center.getX(),this.center.getY()}, 
 							"cannot draw object", Locale.ENGLISH)
 							);
+		publisher.publishEvent(new CustomEvent(this));
 	}
 	
 	@PostConstruct
@@ -47,5 +57,9 @@ public class Circle implements Shape{
 							"farewell not found", Locale.ENGLISH)
 			);
 
+	}
+	public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
+		// TODO Auto-generated method stub
+		this.publisher = publisher;
 	}
 }
