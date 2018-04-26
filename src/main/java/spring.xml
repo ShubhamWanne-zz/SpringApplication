@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:context="http://www.springframework.org/schema/context"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd
-   http://www.springframework.org/schema/context
-   http://www.springframework.org/schema/context/spring-context.xsd" >
+<beans xmlns="http://www.springframework.org/schema/beans" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:context="http://www.springframework.org/schema/context" 
+   xmlns:aop="http://www.springframework.org/schema/aop" 
+   xsi:schemaLocation="	http://www.springframework.org/schema/beans 
+					   	http://www.springframework.org/schema/beans/spring-beans.xsd 
+   						http://www.springframework.org/schema/context 
+   						http://www.springframework.org/schema/context/spring-context.xsd
+   						http://www.springframework.org/schema/aop
+   						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd" >
    
    <context:annotation-config />
-
+   <aop:aspectj-autoproxy />
+    
 	<bean id="parentTriangle" class="com.psl.SpringApplication.Triangle">
 		<property name="a" ref="ZeroPoint" />
 		<property name="points">
@@ -31,7 +35,7 @@
 	<bean id="triangle2" class="com.psl.SpringApplication.Triangle" parent="triangle1">
 	</bean>
 
-	<bean id="triangle" class="com.psl.SpringApplication.Triangle"   >
+	<bean id="triangle3" class="com.psl.SpringApplication.Triangle"   >
 		<property name="a" ref="ZeroPoint" />
 				<property name="b">
 			<bean class="com.psl.SpringApplication.Point">
@@ -93,7 +97,19 @@
 		</property>
 	</bean>
 	
-	<context:component-scan base-package="com.psl.SpringApplication"></context:component-scan>
+	<bean id="triangle" class="com.psl.SpringApplication.Model.Triangle">
+		<property name="name" value="Equilateral" />
+	</bean>
+	
+	<bean id="circle" class="com.psl.SpringApplication.Model.Circle">
+		<property name="name" value="Ellipse" />
+	</bean>
+	<bean id="shapeService" class="com.psl.SpringApplication.Service.ShapeService" autowire="byName" />
+	
+	
+	<bean id="customAspect" class="com.psl.SpringApplication.Aspect.CustomAspect" />
+	
+	<context:component-scan base-package="com.psl.SpringApplication" />
 
 
 <!--  	<bean class="com.psl.SpringApplication.CustomBeanPostProcessor" />
